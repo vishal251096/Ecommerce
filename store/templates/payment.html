@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+	<!-- Start Banner Area -->
+	<section class="banner-area organic-breadcrumb">
+		<div class="container">
+			<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+				<div class="col-first">
+					<h1>Payment</h1>
+					<nav class="d-flex align-items-center">
+						<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+						<a href="{% url 'category' %}">Payment</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Banner Area -->
+
+    <section class="login_box_area section_gap">
+		<div class="container">
+			<div class="row">
+
+                <form action="/confirmation/" method="POST">
+                    {% csrf_token %}
+
+
+
+                    <h1>You are all set</h1>
+                    <fieldset>
+                      <legend>
+                        <h4>Total Amount</h4>
+                      </legend>
+              
+                        <div class="gender" >
+                           <h3><strong>Rs. {{ total_cost }}</strong></h3>
+                        </div>
+              
+                    </fieldset>
+                    <fieldset>
+                      <legend>
+                        <h3>Shipping Address Details</h3>
+                      </legend>
+                      <div  class="personal-details">
+                        <div name="address_id" value="{{address.id}}">
+                          <p>{{address.name}}, {{address.address_line_1}} {{address.address_line_2}}, {{address.city}}</p>
+                          <p>{{address.zipcode}}, {{address.country}}</p>
+              
+                        </div>
+              
+                      </div>
+                    </fieldset>
+                      <script    src="https://checkout.razorpay.com/v1/checkout.js"
+                                 data-key="rzp_test_DHiSVzftjW7gxG"
+                                 data-amount="{{ price }}"
+                                 data-currency="INR"
+                                 data-order_id="{{ order_id }}"
+                                 data-buttontext="Pay with Razorpay"
+                                 data-name="Karma Master"
+                                 data-description="Test transaction"
+                                 data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpWzPOB8s9WRX7JXZ96x1oPESu-eoN5YUFfDKcebTKFn7piPBS&usqp=CAU"
+                                 data-prefill.name="{{ name }}"
+                                 data-prefill.email="{{ email }}"
+                                 data-prefill.contact="{{ phone }}"
+                                 data-theme.color="#F37254">
+                        </script>
+                      <input type="hidden" custom="Hidden Element" name="hidden">
+              
+              
+              
+              
+                    </form>
+
+                </div>
+            </div>
+            </section>
+
+{% endblock %}

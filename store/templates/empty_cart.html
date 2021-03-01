@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Shopping Cart</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{% url 'category' %}">Cart</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Cart Area =================-->
+<section class="cart_area">
+    <div class="container">
+        <div class="cart_inner">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cart in carts %}
+                        <tr>
+                            <td>
+                                <div class="media">
+                                    <div class="d-flex">
+                                        <img src="{{cart.product.product_image.url}}" alt="">
+                                    </div>
+                                    <div class="media-body">
+                                        <p>{{cart.product.name}}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{cart.product.selling_price}}</h5>
+                            </td>
+                            <td>
+                                <div class="product_count">
+        <a class="minus-cart btn" pid="{{cart.product.id}}"><i class="fas fa-minus-square fa-lg"></i></a>
+          <span id="quantity">{{cart.quantity}}</span>
+        <a class="plus-cart btn" pid="{{cart.product.id}}"><i class="fas fa-plus-square fa-lg"></i></a>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <a href="" class="btn btn-sm btn-secondary mr-3 remove-cart" pid="{{cart.product.id}}">Remove Item</a>
+                                </div>
+                            </td>
+                            <td>
+                                <h5>{{cart.product.selling_price}}*{{cart.quantity}}</h5>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        
+                        <tr>
+                            
+                            <td>
+                                <h5>Amount</h5>
+                            </td>
+                            <td>
+                                <h5>Rs. <span id='cost'>{{cost}}</span></h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <h5>Shipping Charges</h5>
+                            </td>
+                            <td>
+                                <h5>Rs.200</h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            
+                            <td>
+                                <h5>Total:</h5>
+                            </td>
+                            <td>
+                                <h5>Rs. <span id='totalcost'>{{total_cost}}</span></h5>
+                            </td>
+                        </tr>
+                        <tr class="out_button_area">
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+
+                            </td>
+                            <td>
+                                <div class="checkout_btn_inner d-flex align-items-center">
+                                    <a class="gray_btn" href="{% url 'index' %}">Continue Shopping</a>
+                                    
+                                </div>
+                                
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Cart Area =================-->
+{% endblock %}

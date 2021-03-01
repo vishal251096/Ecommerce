@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+	<div class="container">
+		<div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+			<div class="col-first">
+				<h1>Product Details Page</h1>
+				<nav class="d-flex align-items-center">
+					<a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">Shop<span class="lnr lnr-arrow-right"></span></a>
+					<a href="#">product-details</a>
+				</nav>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+	<div class="container">
+		<div class="row s_product_inner">
+			<div class="col-lg-6">
+				<div class="s_Product_carousel">
+					<div class="single-prd-item">
+						<img class="img-fluid" src="{{product.product_image.url}}" alt="">
+					</div>
+					<div class="single-prd-item">
+						<img class="img-fluid" src="{{product.product_image.url}}" alt="">
+					</div>
+					<div class="single-prd-item">
+						<img class="img-fluid" src="{{product.product_image.url}}" alt="">
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-5 offset-lg-1">
+				<div class="s_product_text">
+					<h3>{{product.name}}</h3>
+					<h2>Rs. {{product.selling_price}}</h2>
+					<ul class="list">
+						<li><a class="active" href="#"><span>Category</span> : {{product.category}}</a></li>
+						<li>{% if product.count != 0 %}
+							<a href="#"><span>Availibility</span> : In Stock</a>
+							{% else %}
+							<a href="#"><span>Availibility</span> : Out of Stock</a>
+							{% endif %}
+						</li>
+					</ul>
+					<p>{{product.description}}</p>
+					
+					<div class="card_area d-flex align-items-center">
+						{% if user.is_authenticated %}
+						{% if product_incart %}
+						<a href="{% url 'show_cart' %}" class="primary-btn">Go to Cart</a>
+						{% else %}
+						<form action="/add_to_cart">
+						<input type="hidden" name="product_id" value={{product.id}} id='prod_id'>
+						<button type="submit" class="primary-btn">Add to Cart</button>
+						
+						</form>
+						{% endif %}
+						{% endif %}
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--================End Single Product Area =================-->
+
+
+<!-- Start related-product Area -->
+<section class="related-product-area section_gap_bottom">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-lg-6 text-center">
+				<div class="section-title">
+					<h1>Deals of the Week</h1>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
+						magna aliqua.</p>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-9">
+				<div class="row">
+					{% include 'deals.html' %}
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3">
+				<div class="ctg-right">
+					<a href="#" target="_blank">
+						<img class="img-fluid d-block mx-auto" src="img/category/c5.jpg" alt="">
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End related-product Area -->
+{% endblock %}

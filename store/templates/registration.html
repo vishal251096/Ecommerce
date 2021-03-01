@@ -1,0 +1,68 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Start Banner Area -->
+<section class="banner-area organic-breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-banner d-flex flex-wrap align-items-center justify-content-end">
+            <div class="col-first">
+                <h1>Register</h1>
+                <nav class="d-flex align-items-center">
+                    <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
+                    <a href="{% url 'category' %}">Register</a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Banner Area -->
+
+<!--================Registration Area =================-->
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login_box_img">
+                    <img class="img-fluid" src="{% static 'img/login.jpg' %}" alt="">
+                    <div class="hover">
+                        <h4>New to our website?</h4>
+                        <p>There are advances being made in science and technology everyday, and a good example of this is the</p>
+                        <a class="primary-btn" href="{% url 'login' %}">Go to Login Page</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="login_form_inner">
+                    <h3>User Registration</h3>
+                    <form class="row login_form" action="" enctype="multipart/form-data" method="post" id="contactForm" novalidate="novalidate">
+                        {% if messages %}
+                        {% for message in messages %}
+                        <p {% if message.tags %} class="alert alert-{{message.tags}} mb-5" {% endif %}>{{message}}</p>
+                        {% endfor %}
+                        {% endif %}
+                        {% csrf_token %}
+                        {% for f in form %}
+                        <div class="col-md-12 form-group">
+                            {{f.label_tag}} {{f}} <small class="text-danger">{{f.errors|striptags}}</small>
+                        </div>
+                        {% endfor %}
+                        <div class="col-md-12 form-group">
+                            <button type="submit" value="submit" class="primary-btn">Register</button>
+                            <div class="text-center text-primary fw-bold"><small>Existing User ? <a href="{% url 'login' %}" class="text-danger">Login Now</a> </small></div>
+                                {% if form.non_field_errors %}
+                                    {% for error in form.non_field_errors %}
+                                <p class="alert alert-danger my-3">{{error}}</p>
+                                {% endfor %}
+                                {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================End Registration Area =================-->
+
+{% endblock %}

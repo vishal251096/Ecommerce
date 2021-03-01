@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-lg-10">
+                <div class="login_form_inner">
+                    <h3>Welcome {{request.user}}</h3>
+                  {% for ship in addresses %}
+                  <p>{{ship.name}}</p>
+                  <p>{{ship.address_line_1}}</p>
+                  <p>{{ship.address_line_2}}</p>
+                  <p></p>
+                  {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    {% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="login_box_area section_gap">
+    <div class="container">
+        <div class="row">
+<div class="col-lg-12">
+    <div class="login_form_inner">
+        <h3>Welcome <span class="text-capitalize">{{request.user}}</span></h3>
+        
+        <ul>
+            <li><p>First Name: {{profile.first_name}}</p></li>
+            <li><p>Last Name: {{profile.last_name}}</p></li>
+            <li><p>Email: {{profile.email}}</p></li>
+            <li><p>Mobile Number: {{profile.mobile}}</p></li>
+            <li><p>Alternate Mobile Number: {{profile.alternate_mobile}}</p></li>
+            <li><p><a href="{% url 'shippingaddresscreate' %}">Shipping Addresses</a></p></li>
+        </ul>
+        
+    </div>
+</div>
+</div>
+</div>
+</section>
+{% endblock %}
